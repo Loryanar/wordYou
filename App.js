@@ -17,8 +17,5 @@ const App =() =>{
   );
 
 }; 
-const styles= StyleSheet.create ({
-  container: {flex:1, justifyContent:"center", alignContent:"center", backgroundColor:"#292929" ,},
-  tittle: {fontSize: 30}
-})
+
 export default App;

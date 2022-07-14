@@ -32,6 +32,7 @@ const [state,setState]= useState({
                 .then(async (response) => {
                     console.log(response.data);
                     console.log('wiiu');
+                    navigation.navigate('User')
                     localStorage.setItem("token",response.data.token)
                    
                 })
@@ -49,14 +50,14 @@ const [state,setState]= useState({
 <ScrollView style={styles.container}>
       
       <View style={styles.inputGroup}>
-        <TextInput
+        <TextInput placeholderTextColor= '#f4d03f'
           placeholder="Username"
            onChangeText={(value) => ChangeText("Username", value) }
         />
       </View>
 
       <View style={styles.inputGroup}>
-        <TextInput
+        <TextInput placeholderTextColor= '#f4d03f'
           placeholder="Phone"
           onChangeText={(value) => ChangeText('Phone',value) }
         />
@@ -65,7 +66,7 @@ const [state,setState]= useState({
       
     
       <View style={styles.inputGroup}>
-        <TextInput
+        <TextInput placeholderTextColor= '#f4d03f'
           placeholder="Password"
           onChangeText={(value) => ChangeText('Password',value) }
           secureTextEntry={true}
@@ -73,7 +74,7 @@ const [state,setState]= useState({
       </View>
 
       <View >
-        <Button title="SIGN UP" onPress={()=> reg(data)} />
+        <Button color='#7dcea0' title="SIGN UP" onPress={()=> reg(data)} />
       </View>
     </ScrollView>
      );
@@ -82,14 +83,15 @@ const [state,setState]= useState({
     container: {
       flex: 1,
       padding: 35,
+      backgroundColor: '#2e4053',
+      color:"white"
     },
     inputGroup: {
       flex: 1,
       padding: 0,
       marginBottom: 15,
       borderBottomWidth: 1,
-      borderBottomColor: "#cccccc",
-
+      borderBottomColor: "#48c9b0",
     },
     loader: {
       left: 0,
@@ -100,4 +102,15 @@ const [state,setState]= useState({
       alignItems: "center",
       justifyContent: "center",
     },
+    buton: {
+      ba: '#48c9b0',
+        
+    },
+    cv:{
+        alignItems: 'center',
+        padding: 18,
+    },
+    button:{
+color:'#7dcea0'
+    }
   });

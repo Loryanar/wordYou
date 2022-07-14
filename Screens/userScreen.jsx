@@ -2,7 +2,7 @@ import React ,{useState, useEffect} from 'react';
 import {Text,View,StyleSheet, TextInput, ScrollView,Button,TouchableOpacity} from 'react-native'; 
 import { useNavigation } from "@react-navigation/native";
 import { Card, Avatar, Image } from "react-native-elements";
-import Tabs from '../Components/Tabs'
+import * as url from '../text';
 
 
 
@@ -34,7 +34,7 @@ const navigation= useNavigation()
     const infoPerfil = async() => {
 
         try {
-           await fetch(url.url+"perfil" ,{
+           await fetch(url.url+"perfil/0" ,{
       
                     method: 'GET',
                     headers: new Headers({
@@ -47,6 +47,7 @@ const navigation= useNavigation()
                     return data1
                                    }).then(data1=>{
                     let data =data1.usuario;
+                    console.log(data)
                    ChangeText("data", data)
                     return data
                 })
@@ -60,21 +61,16 @@ const navigation= useNavigation()
 
     return(       
         <ScrollView style={styles.container}>
-            <View><Tabs/></View>
+          
 <Card>
 <Text style={styles.titulo}>
                     {state.data.username}
                 </Text>
  <View >
-                <Text style={styles.infoPerfil}>
-                  {state.data.nombre} {state.data.apellido}
-                </Text>
-                <Text style={styles.infoPerfil}>
-                   
-                </Text>
+            
                 
                 <View style={styles.button1}>              
-    <Button title="Editar Perfil" onPress={()=> navigation.navigate('UpPerfil')} />
+    <Button  color='#7dcea0' title="Editar Perfil" onPress={()=> navigation.navigate('UserUp')} />
     </View>
     </View>
   
@@ -89,9 +85,11 @@ const navigation= useNavigation()
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      padding: 35,
-    },
+        flex: 1,
+        padding: 35,
+        backgroundColor: '#2e4053',
+        color:"white"
+      },
    
     contentButton: {
         flex: 2,

@@ -29,6 +29,7 @@ export default function Login({navigation}){
       .then(async (response) => {
       console.log(response.data);
       console.log('wiiu');
+      navigation.navigate('User')
        localStorage.setItem('token',response.data.token)
    
   
@@ -52,19 +53,19 @@ export default function Login({navigation}){
         <ScrollView style={styles.container}>
             
               <View style={styles.inputGroup}>
-                <TextInput
+                <TextInput placeholderTextColor= '#f4d03f'
                   placeholder="Username"
                   onChangeText={(value) => ChangeText("Username", value)} 
                 />
               </View>
               <View style={styles.inputGroup}>
-                <TextInput
+                <TextInput  placeholderTextColor= '#f4d03f'
                   placeholder="Password"  onChangeText={(value) => ChangeText('Password',value) } secureTextEntry={true}
                 />
               </View>
         
               <View >
-                <Button title="Login"  
+                <Button color='#7dcea0' title="Login"  
                 onPress={()=> log(data) }/>
               </View>
 
@@ -83,29 +84,26 @@ export default function Login({navigation}){
             container: {
               flex: 1,
               padding: 35,
+              backgroundColor: '#2e4053',
+              
             },
             inputGroup: {
               flex: 1,
               padding: 0,
               marginBottom: 15,
               borderBottomWidth: 1,
-              borderBottomColor: "#cccccc",
+              borderBottomColor: "#48c9b0",
+              
+              
             },
-            loader: {
-              left: 0,
-              right: 0,
-              top: 0,
-              bottom: 0,
-              position: "absolute",
-              alignItems: "center",
-              justifyContent: "center",
-            },
+            
             buton: {
-               color: 'blue',
+              color: '#f4d03f'
                 
             },
             cv:{
                 alignItems: 'center',
                 padding: 18,
-            }
+            },
+           
           });
