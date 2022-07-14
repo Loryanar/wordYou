@@ -20,6 +20,7 @@ const logout = () => {
                 if (response.status == 200) {
                  localStorage.removeItem("token")
                  console.log(response.json());
+                 navigation.navigate("Login")
                    
                 }
 
@@ -74,7 +75,7 @@ const update = () =>{
                                     }).then(data1=>{
                      let data =data1.msg;
                      console.log(data)
-                    
+                    navigation.navigate("User")
                      return data
                  })
          } catch (error) {
