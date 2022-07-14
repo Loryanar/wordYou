@@ -3,7 +3,7 @@ import {Text,View,StyleSheet, TextInput, ScrollView,Button} from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { List } from '../App';
 import axios from "axios";
-
+import * as url from '../text'
 import { useNavigation } from "@react-navigation/native";
 
 export default function Register(){
@@ -11,9 +11,7 @@ export default function Register(){
   
 const [state,setState]= useState({
              Username:'',
-             Name:'',
-             Lastname:'',
-             Email:'',
+             Phone:'',
              Password:'' 
 
          })  
@@ -23,8 +21,7 @@ const [state,setState]= useState({
 
     const data ={
         "Username":state.Username, 
-            "Name":state.Name,
-            "Lastname":state.Lastname,
+            "Telefono":state.Phone,
             "Password":state.Password
     }
     function reg(data){
@@ -36,7 +33,7 @@ const [state,setState]= useState({
                     console.log(response.data);
                     console.log('wiiu');
                     localStorage.setItem("token",response.data.token)
-                    navigation.navigate('Perfil');
+                   
                 })
                 .catch(error => {
                     
@@ -60,17 +57,12 @@ const [state,setState]= useState({
 
       <View style={styles.inputGroup}>
         <TextInput
-          placeholder="Name"
-          onChangeText={(value) => ChangeText('Name',value) }
+          placeholder="Phone"
+          onChangeText={(value) => ChangeText('Phone',value) }
         />
       </View>
 
-      <View style={styles.inputGroup}>
-        <TextInput
-          placeholder="Lastname"
-          onChangeText={(value) => ChangeText('Lastname',value) }
-        />
-      </View>
+      
     
       <View style={styles.inputGroup}>
         <TextInput

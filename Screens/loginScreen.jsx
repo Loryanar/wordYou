@@ -3,6 +3,7 @@ import {Text,View,StyleSheet, TextInput, ScrollView,Button,TouchableOpacity} fro
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from '@react-navigation/stack';
 import axios from "axios";
+import * as url from '../text'
 
  
 export default function Login({navigation}){
@@ -29,7 +30,7 @@ export default function Login({navigation}){
       console.log(response.data);
       console.log('wiiu');
        localStorage.setItem('token',response.data.token)
-     navigation.navigate('Perfil')
+   
   
    
 })
