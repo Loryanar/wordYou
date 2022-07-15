@@ -12,9 +12,15 @@ const logout = () => {
                 method: 'GET',
                 headers: new Headers({
                     'authorization': localStorage.getItem("token"),
-                })
+                }),body: JSON.stringify(
+                  {
+                "Username":state.Username, 
+                
+                "Password":state.Password
+                 })
+              })
   
-            }).then(function (response) {
+            .then(function (response) {
   
                 console.log(response);
                 if (response.status == 200) {
@@ -39,10 +45,9 @@ const perfilUpdate = ( )=>{
     const navigation= useNavigation()
     const [state,setState]= useState({
         Username:'',
-        Name:'',
-        Lastname:'',
-        Email:'',
-        Password:'' 
+       Telefono:'',
+        NPassword:'' ,
+        OPassword:'',
 
     })  
     const ChangeText=(name, value)=>{
@@ -51,10 +56,9 @@ const perfilUpdate = ( )=>{
 
 const data ={
        "Username":state.Username, 
-       "Name":state.Name,
-       "Lastname":state.Lastname,
-       "oldPassword":state.PasswordO,
-       "newPassword":state.PasswordN
+       "Telefono":state.Telefono,
+       "oldPassword":state.OPassword,
+       "newPassword":state.NPassword
 }
 
 const update = () =>{
@@ -73,8 +77,11 @@ const update = () =>{
                      console.log(data1)
                      return data1
                                     }).then(data1=>{
-                     let data =data1.msg;
-                     console.log(data)
+                     if(data1.estadoUsername==1){
+                        localStorage.setItem("token",data1.newToken)
+                     }  if(data1.estadoUsername==0){
+                        alert("El usuario ya existe")
+                     }
                     navigation.navigate("User")
                      return data
                  })
@@ -122,23 +129,29 @@ function del() {
         <TextInput  placeholderTextColor= '#f4d03f'
           placeholder="Username"
           
-          onChangeText={(value) => ChangeText('Userame',value) }
+          onChangeText={(value) => ChangeText('Username',value) }
         />
       </View>
 
     
-      
+      <View style={styles.inputGroup}>
+                <TextInput  placeholderTextColor= '#f4d03f'
+                  placeholder="Phone"  onChangeText={(value) => ChangeText('Phone',value) } secureTextEntry={true}
+                />
+              </View>
+        
      
 
       <View style={styles.inputGroup}>
                 <TextInput  placeholderTextColor= '#f4d03f'
-                  placeholder="OldPassword"  onChangeText={(value) => ChangeText('PasswordO',value) } secureTextEntry={true}
+                  placeholder="OldPassword"  onChangeText={(value) => ChangeText('OPassword',value) } secureTextEntry={true}
                 />
               </View>
         
+        
               <View style={styles.inputGroup}>
                 <TextInput  placeholderTextColor= '#f4d03f'
-                  placeholder="NewPassword"  onChangeText={(value) => ChangeText('PasswordN',value) } secureTextEntry={true}
+                  placeholder="NewPassword"  onChangeText={(value) => ChangeText('NPassword',value) } secureTextEntry={true}
                 />
               </View>
 
