@@ -3,7 +3,8 @@ import { createStackNavigator } from '@react-navigation/stack'
 import Register from './Screens/registerScreen';
 import Login from './Screens/loginScreen';
 import User from './Screens/userScreen';
-import UserUp from './Screens/Edits/editScreen'
+import perfilUpdate from './Screens/Edits/editScreen'
+import home from './Screens/homeScreen';
 
 
 const Stack= createStackNavigator()
@@ -12,7 +13,7 @@ export default function Navigator(){
 return(
 <Stack.Navigator  
   
-    initialRouteName="Login"
+    initialRouteName="Home"
    >
       
       
@@ -27,12 +28,17 @@ return(
        
       />
       <Stack.Screen name="UserUp"
-        component={UserUp}
+        component={perfilUpdate}
        
       />
         <Stack.Screen name="Register"
         component={Register}
         
+        />
+         <Stack.Screen 
+        name="Home"
+        component={home}
+       
         />
 
        
