@@ -5,6 +5,7 @@ import Login from './Screens/loginScreen';
 import User from './Screens/userScreen';
 import perfilUpdate from './Screens/Edits/editScreen'
 import home from './Screens/homeScreen';
+import RoomS from './Screens/roomScreen';
 
 
 const Stack= createStackNavigator()
@@ -13,7 +14,7 @@ export default function Navigator(){
 return(
 <Stack.Navigator  
   
-    initialRouteName="Home"
+    initialRouteName="RoomS"
    >
       
       
@@ -40,7 +41,10 @@ return(
         component={home}
        
         />
-
+ <Stack.Screen name="RoomS"
+        component={RoomS}
+       
+      />
        
     </Stack.Navigator>
     
