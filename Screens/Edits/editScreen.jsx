@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {Text,View,StyleSheet, TextInput, ScrollView,Button} from 'react-native'; 
 import * as url from '../../text'
 import { useNavigation } from "@react-navigation/native";
-import Tabs from '../../Components/Tabs';
 
 const logout = () => {
 
@@ -41,7 +40,7 @@ const logout = () => {
     
 }
 
-const perfilUpdate = ( )=>{
+const PerfilUpdate = ( )=>{
     const navigation= useNavigation()
     const [state,setState]= useState({
         Username:'',
@@ -196,4 +195,4 @@ function del() {
     },
   
   });
- export default perfilUpdate;
+ export default PerfilUpdate;

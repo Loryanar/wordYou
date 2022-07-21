@@ -3,8 +3,8 @@ import { createStackNavigator } from '@react-navigation/stack'
 import Register from './Screens/registerScreen';
 import Login from './Screens/loginScreen';
 import User from './Screens/userScreen';
-import perfilUpdate from './Screens/Edits/editScreen'
-import home from './Screens/homeScreen';
+import PerfilUpdate from './Screens/Edits/editScreen'
+import Home from './Screens/homeScreen';
 import RoomS from './Screens/roomScreen';
 
 
@@ -14,7 +14,7 @@ export default function Navigator(){
 return(
 <Stack.Navigator  
   
-    initialRouteName="RoomS"
+    initialRouteName="Login"
    >
       
       
@@ -29,7 +29,7 @@ return(
        
       />
       <Stack.Screen name="UserUp"
-        component={perfilUpdate}
+        component={PerfilUpdate}
        
       />
         <Stack.Screen name="Register"
@@ -38,7 +38,7 @@ return(
         />
          <Stack.Screen 
         name="Home"
-        component={home}
+        component={Home}
        
         />
  <Stack.Screen name="RoomS"

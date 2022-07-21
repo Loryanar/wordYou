@@ -6,9 +6,10 @@ import { useNavigation } from "@react-navigation/native";
 import BcryptReactNative from 'bcrypt-react-native';
 
 export default function Register(){
+
           const navigation=  useNavigation()
 const [isModalVisible, setModalVisible] = useState(false);
-const [codigo, setCodigo] = useState();
+const [codigo, setCodigo] = useState(false);
 const [codigoH, setCodigoH] = useState();
 const [state,setState]= useState({
              Username:'',
@@ -40,7 +41,7 @@ const [state,setState]= useState({
                 .then(async (response) => {
                     console.log(response.data);
                     console.log('wiiu');
-                    navigation.navigate('User')
+                    navigation.navigate('Home')
                     localStorage.setItem("token",response.data.token)
                    
                 })
@@ -78,6 +79,7 @@ const [state,setState]= useState({
                if(data!=null){
                 toggleModalVisibility()
                setCodigoH(data)
+               setCodigo(true)
 
                }
                return data
@@ -93,8 +95,9 @@ const [state,setState]= useState({
   
 }      
 function hola(){
-  reg(data)
-  toggleModalVisibility
+  if(codigo==true){ reg(data)
+  toggleModalVisibility}
+ 
 }
 
          return(

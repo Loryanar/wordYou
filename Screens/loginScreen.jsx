@@ -29,7 +29,7 @@ export default function Login({navigation}){
       .then(async (response) => {
       console.log(response.data);
       console.log('wiiu');
-      navigation.navigate('User')
+      navigation.navigate('Home')
        localStorage.setItem('token',response.data.token)
    
   
