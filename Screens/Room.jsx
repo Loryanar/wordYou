@@ -1,38 +1,33 @@
 
-import { StyleSheet, View, Button, Text,ScrollView } from 'react-native';
+import { StyleSheet, View, Button, Text,ScrollView,FlatList,TouchableOpacity } from 'react-native';
 import React ,{useState, useEffect} from 'react';
 import { useNavigation } from "@react-navigation/native";
 import { Card, Avatar, Image } from "react-native-elements";
 import * as url from '../text';
 
-export default function Room() {
 
+export default function Room() {
+    const [posts, setPosts] = useState([]);
+    const [flag,setFlag] = useState(0)
    
-        useEffect(() => {
-          cargar()
-          })
-    const [flag,setFlag] = useState(true)
-        const [state,setState]= useState({
-            data:''
+    useEffect(()=> {
     
-        })  
-           const ChangeText=(name, value)=>{
-           setState({...state, [name]: value})
-        }
+        cargar()
+         })
+         function cargar(){
+          if (flag==0) {
+             rooms()
+              return setFlag(flag+1)
+          }
+      }
     
     const navigation= useNavigation()
        
-        function cargar(){
-            if (flag==true) {
-                infoPerfil()
-                return setFlag(false)
-            }
-        }
-    
+      
         
        
     
-        const infoPerfil = async() => {
+        const rooms = async() => {
     
             try {
                await fetch(url.url+"rooms" ,{
@@ -44,9 +39,16 @@ export default function Room() {
           
                     }).then(function (response) {
                    let data1=response.json()
-                       console.log(data1)
+                       
                         return data1
                                        }).then(data1=>{
+                                        var  slic= data1.datosRoom
+                                        
+                                        
+                                       setPosts(slic)
+                                          
+                                         console.log(slic)
+                                         return slic
                        
                     })
             } catch (error) {
@@ -57,12 +59,38 @@ export default function Room() {
             
         }
     
+
+        
+ 
+
+
+    const renderItem = ({item, index}) => (
+        <TouchableOpacity
+        style={styles.separar}
+        >
+           
+
+            <View style={styles.textContainerRow}>
+                <Text style={styles.itemTitle}>{item.codigoroom}</Text>
+                <View>
+
+                
+          <Text>{item.autor}</Text>
+                </View>
+                
+            </View>
+        
+        </TouchableOpacity>
+    );
+
+
+
         return(       
             <ScrollView style={styles.container}>
               
     <Card>
     <Text style={styles.titulo}>
-                        {state.data.username}
+                        
                     </Text>
      <View >
                 
@@ -74,7 +102,11 @@ export default function Room() {
       
     </Card>
     
-             
+    <FlatList
+                data={posts}
+                renderItem={renderItem}
+                key={item => item.codigoroom}
+            />         
                      
             </ScrollView>
         );
@@ -135,7 +167,18 @@ export default function Room() {
           position: "absolute",
           alignItems: "center",
           justifyContent: "center",
-        }
+        },itemTitle: {
+            color: '#FFF',
+            fontSize: 25,
+            fontWeight: 'bold',
+            marginLeft: 10,
+        },
+        itemContent: {
+            color: '#FFF',
+            fontSize: 10,
+            marginLeft: 10,
+            marginTop: 5,
+        },
     });
     
     
