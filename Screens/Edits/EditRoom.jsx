@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Text, ImageBackground,View,StyleSheet, TextInput, ScrollView,Button,  Dimensions} from 'react-native'; 
-
+import ButtonDR from '../../Components/ButtonDR';
 import * as url from '../../text'
 import { useNavigation } from "@react-navigation/native";
 const screenHeight = Dimensions.get('window').height;
@@ -114,8 +114,9 @@ export default function RoomS(){
         />
       </View>
       <View >
-        <Button style={styles.buton} color='#7dcea0' title="Create Room" onPress={()=> create()} />
+        <Button style={styles.buton} color='#7dcea0' title="Edit Room" onPress={()=> create()} />
       </View>
+      <ButtonDR/>
 </ImageBackground>
     </ScrollView>
      );
