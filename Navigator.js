@@ -7,7 +7,7 @@ import PerfilUpdate from './Screens/Edits/editScreen'
 import Home from './Screens/homeScreen';
 import RoomS from './Screens/roomScreen';
 import Room from './Screens/Room'
-
+import EditRoom from './Screens/Edits/EditRoom'
 
 const Stack= createStackNavigator()
 
@@ -15,7 +15,7 @@ export default function Navigator(){
 return(
 <Stack.Navigator  
   
-    initialRouteName="Room"
+    initialRouteName="Login"
    >
       
       
@@ -47,6 +47,11 @@ return(
       />
        <Stack.Screen name="Room"
         component={Room}
+       
+      />
+       
+       <Stack.Screen name="EditRoom"
+        component={EditRoom}
        
       />
        

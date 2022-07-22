@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Text, ImageBackground,View,StyleSheet, TextInput, ScrollView,Button,  Dimensions} from 'react-native'; 
-import axios from "axios";
-import * as url from '../text'
+
+import * as url from '../../text'
 import { useNavigation } from "@react-navigation/native";
 const screenHeight = Dimensions.get('window').height;
     const screenWidth = Dimensions.get('window').width;
@@ -14,7 +14,7 @@ export default function RoomS(){
         Rounds:'',
         Words:'', 
         Try:'',
-        Code:'',
+        Code:localStorage.getItem("codigo"),
        
 
     })  
@@ -28,6 +28,7 @@ export default function RoomS(){
         'Rounds':state.Rounds,
         'Words':state.Words, 
         'Try':state.Try,
+        'Code':state.Code
        
     }
     console.log(data)
@@ -36,7 +37,7 @@ export default function RoomS(){
         try{
     
           fetch(url.url+"room",{
-              method: 'POST',
+              method: 'PUT',
               headers: new Headers({
                   'Content-Type': 'application/json',
                   'authorization': localStorage.getItem("token")
@@ -96,6 +97,8 @@ export default function RoomS(){
         />
       </View>
 
+
+
     
     
       <View style={styles.inputGroup}>
@@ -104,7 +107,12 @@ export default function RoomS(){
           onChangeText={(value) => ChangeText('Try',value) }
         />
       </View>
-
+<View style={styles.inputGroup}>
+        <TextInput  style={styles.container} placeholderTextColor= '#f4d03f'
+          placeholder={state.Code}
+          onChangeText={(value) => ChangeText('Code',value) }
+        />
+      </View>
       <View >
         <Button style={styles.buton} color='#7dcea0' title="Create Room" onPress={()=> create()} />
       </View>

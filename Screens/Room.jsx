@@ -43,7 +43,7 @@ export default function Room() {
                         return data1
                                        }).then(data1=>{
                                         var  slic= data1.datosRoom
-                                        
+                                        localStorage.setItem("codigo",slic.codigoroom)
                                         
                                        setPosts(slic)
                                           
@@ -65,6 +65,7 @@ export default function Room() {
 
 
     const renderItem = ({item, index}) => (
+        localStorage.setItem("codigo",item.codigoroom),
         <TouchableOpacity
         style={styles.separar}
         >
@@ -107,7 +108,11 @@ export default function Room() {
                 renderItem={renderItem}
                 key={item => item.codigoroom}
             />         
-                     
+                    <Button
+    color='#7dcea0'
+       title="Edit Room"
+      onPress={()=>navigation.navigate('EditRoom')}
+     />
             </ScrollView>
         );
     
