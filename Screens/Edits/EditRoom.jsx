@@ -14,6 +14,7 @@ export default function RoomS(){
         Rounds:'',
         Words:'', 
         Try:'',
+        Code:'',
        
 
     })  
