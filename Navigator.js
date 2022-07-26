@@ -8,6 +8,7 @@ import Home from './Screens/homeScreen';
 import RoomS from './Screens/roomScreen';
 import Room from './Screens/Room'
 import EditRoom from './Screens/Edits/EditRoom'
+import Game from './Screens/ScreenG/gameScreen';
 
 const Stack= createStackNavigator()
 
@@ -15,7 +16,7 @@ export default function Navigator(){
 return(
 <Stack.Navigator  
   
-    initialRouteName="Login"
+    initialRouteName="Game"
    >
       
       
@@ -54,7 +55,12 @@ return(
         component={EditRoom}
        
       />
+<Stack.Screen name="Game"
+        component={Game}
        
+      />
+       
+
     </Stack.Navigator>
     
 )
