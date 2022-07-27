@@ -2,9 +2,9 @@ export const colors={
     grisAzul:'#2e4053',
     tabs:'#95A5A6 ',
     amarillo: "#f4d03f",
-    verde:'#68068D',
+    verde:'#2ECC71',
     buttons:"7dcea0",
-    other:"#D0D3D4",
+    other:"#616A6B",
     grisclaro: "#909497"
 };
 
