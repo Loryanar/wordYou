@@ -1,32 +1,110 @@
 import React, {useState, useEffect} from 'react';
+import { DatePickerIOSBase } from 'react-native';
 import {  View, Text, SafeAreaView, ScrollView, StyleSheet,Alert } from 'react-native';
 import { StatusBar } from 'react-native-web';
 import Keyboard from "../../Components/Game/Keyboard"
 import { colors,CLEAR,ENTER } from '../../constants';
+import * as url from '../../text'
 
-
-export default function Game() {
-  const copyArray=(arr)=>{
+const copyArray=(arr)=>{
     return[...(arr.map(rows=>[...rows]))]
   }
-const word="hollo";
-const ntry=6;
-const letters= word.split("");
+export default function Game() {
+  
+const [trys,setTrys]=useState(2);
+const [flag,setFlag]=useState(3);
+const [wor, setWor]= useState("holioo");
+   
+  
 
-const [rows,setRows]=useState( new Array(ntry).fill(
-  new Array(letters.length).fill("") 
-));
+
+const ntry=trys;
+const letters= wor.split("");
+
+const [rows,setRows]=useState( );
 
 const [curRow,setCurRow]=useState(0);
 
 const [curCol,setCurCol]=useState(0);
 
-useEffect(()=>{
-  if(curRow>0){
-    checkGameState();
-  }
 
-},[curRow]);
+ function getRoom(){
+      let code= localStorage.getItem("codigo")
+        try {
+            fetch(url.url+"room/"+code,{
+      
+                    method: 'GET',
+                    headers: new Headers({
+                        'authorization': localStorage.getItem("token"),
+                    })
+      
+                }).then(function (response) {
+             
+                    return response.json()
+                                   }).then(data1=>{
+
+                    console.log(data1.Reglas);
+                    const dat=data1.Reglas.trys;
+                    console.log(dat)
+                    setTrys(dat);
+
+                    console.log(trys);
+                    getWord(data1.Reglas.wordLength);
+                   
+                    return dat
+                })
+        } catch (error) {
+      
+            console.error(error);    
+      
+        }
+        
+    
+    }
+
+    const getWord=async(word) =>{
+        try {
+            fetch("https://palabras-aleatorias-public-api.herokuapp.com/random-by-length?length="+word, {
+      
+                    method: 'GET',
+                    
+      
+                }).then(function (response) {
+              
+             const  data=response.json();
+                
+                    return data
+                                   }).then(data1=>{
+                                    console.log(data1.body.Word)
+                                    setWor(data1.body.Word);
+                                    console.log(wor)
+                    
+                   
+                    return data1
+                })
+        } catch (error) {
+      
+            console.error(error);    
+      
+        }
+        
+    
+    }
+
+
+useEffect(() => {
+  if(flag<=5){
+    getRoom()
+    setFlag(flag+1)
+    console.log(flag)
+    arrays=new Array(ntry).fill(
+      new Array(letters.length).fill("") 
+    );
+  }
+  console.log(wor)
+  console.log(trys)
+  
+  })
 
 const checkGameState=()=>{
   if(checkIfWon()){
@@ -96,7 +174,7 @@ row.filter((cell,j)=> getCellBGColor(i,j)==color)
 );
 }
 const greenCaps= getAllLettersWithColor(colors.verde);
-const blackCaps= getAllLettersWithColor(colors.other);
+const blackCaps= getAllLettersWithColor(colors.grisAzul);
 const yellowCaps= getAllLettersWithColor(colors.amarillo);
 
   return (

@@ -24,7 +24,7 @@ export default function RoomS(){
     
 
     const data ={
-       ' Timer':state.Timer,
+       'Timer':state.Timer,
         'Rounds':state.Rounds,
         'Words':state.Words, 
         'Try':state.Try,

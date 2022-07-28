@@ -23,17 +23,17 @@ export default function RoomS(){
     
 
     const data ={
-       ' Timer':state.Timer,
+       'Timer':state.Timer,
         'Rounds':state.Rounds,
         'Words':state.Words, 
         'Try':state.Try,
        
     }
-    console.log(data)
+    
 
     const create = () =>{
         try{
-    
+    console.log(data)
           fetch(url.url+"room",{
               method: 'POST',
               headers: new Headers({
