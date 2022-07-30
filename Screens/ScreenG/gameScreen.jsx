@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { DatePickerIOSBase } from 'react-native';
+
 import {  View, Text, SafeAreaView, ScrollView, StyleSheet,Alert } from 'react-native';
 import { StatusBar } from 'react-native-web';
 import Keyboard from "../../Components/Game/Keyboard"
@@ -11,17 +11,24 @@ const copyArray=(arr)=>{
   }
 export default function Game() {
   
-const [trys,setTrys]=useState(2);
-const [flag,setFlag]=useState(3);
-const [wor, setWor]= useState("holioo");
-   
+
+const [flag,setFlag]=useState(1);
+const [state, setState]= useState({
+  word:'',
+  reglas:''
+
+});
+const [rows,setRows]=useState([]);
   
+const ChangeText=(name, value)=>{
+  setState({...state, [name]: value})
+}
+const word=state.word
+const ntry=state.reglas.trys;
+const letters= word.split("")
 
 
-const ntry=trys;
-const letters= wor.split("");
 
-const [rows,setRows]=useState( );
 
 const [curRow,setCurRow]=useState(0);
 
@@ -44,12 +51,11 @@ const [curCol,setCurCol]=useState(0);
                                    }).then(data1=>{
 
                     console.log(data1.Reglas);
-                    const dat=data1.Reglas.trys;
+                    const dat=data1.Reglas;
                     console.log(dat)
-                    setTrys(dat);
-
-                    console.log(trys);
-                    getWord(data1.Reglas.wordLength);
+                    ChangeText("reglas",dat)
+                    
+                    getWord(data1.Reglas);
                    
                     return dat
                 })
@@ -62,9 +68,9 @@ const [curCol,setCurCol]=useState(0);
     
     }
 
-    const getWord=async(word) =>{
+    const getWord=async(reglas) =>{
         try {
-            fetch("https://palabras-aleatorias-public-api.herokuapp.com/random-by-length?length="+word, {
+            fetch("https://palabras-aleatorias-public-api.herokuapp.com/random-by-length?length="+reglas.wordLength, {
       
                     method: 'GET',
                     
@@ -76,8 +82,12 @@ const [curCol,setCurCol]=useState(0);
                     return data
                                    }).then(data1=>{
                                     console.log(data1.body.Word)
-                                    setWor(data1.body.Word);
-                                    console.log(wor)
+                                    let wo=data1.body.Word.split("")
+                                    ChangeText("word",data1.body.Word)
+                                    console.log(state);
+                                    setRows( new Array(reglas.trys).fill(
+                                      new Array(wo.length).fill("") 
+                                    ) )
                     
                    
                     return data1
@@ -93,16 +103,16 @@ const [curCol,setCurCol]=useState(0);
 
 
 useEffect(() => {
-  if(flag<=5){
+  if(flag==1){
     getRoom()
     setFlag(flag+1)
     console.log(flag)
-    arrays=new Array(ntry).fill(
-      new Array(letters.length).fill("") 
-    );
+    console.log("hellloo")
+    console.log(state.reglas.trys)
+   
   }
-  console.log(wor)
-  console.log(trys)
+ 
+
   
   })
 

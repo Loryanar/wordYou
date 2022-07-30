@@ -48,6 +48,7 @@ const navigation= useNavigation()
                                    }).then(data1=>{
                     let data =data1.usuario;
                     console.log(data)
+                    localStorage.setItem("user",data.username)
                    ChangeText("data", data)
                     return data
                 })
