@@ -4,14 +4,16 @@ import {  View, Text, SafeAreaView, ScrollView, StyleSheet,Alert } from 'react-n
 import { set } from 'react-native-reanimated';
 import { StatusBar } from 'react-native-web';
 import Keyboard from "../../Components/Game/Keyboard"
-import { colors,CLEAR,ENTER } from '../../constants';
+import { colors,CLEAR,ENTER, colorsToEmoji } from '../../constants';
 import * as url from '../../text'
+import * as Clipboard from 'expo-clipboard'
+import soc from '../RoomG'
 
 const copyArray=(arr)=>{
     return[...(arr.map(rows=>[...rows]))]
   }
 export default function Game() {
-  
+  const ws = new WebSocket('wss://ejemplosocketword.herokuapp.com/');
 
 const [flag,setFlag]=useState(1);
 const [state, setState]= useState({
@@ -137,9 +139,13 @@ const checkGameState=()=>{
   if(checkIfWon()){
     Alert.alert("Won");
     console.log("ganar")
+    shareScore()
+  
+    localStorage.setItem("var", true)
    }else if(checkIfLost()){
+    localStorage.setItem("var",false)
   Alert.alert("Nah"),
-  console.log("ganar")
+  console.log("perder")
    }
   
 }
@@ -151,7 +157,15 @@ const checkIfLost=()=>{
   return curRow== rows.length;
 }
 
-
+const shareScore=async()=>{
+  const textMap=rows
+  .map((row,i)=>
+  row.map((cell,j)=> colorsToEmoji[getCellBGColor(i,j)]).join).filter((row) => row).join("\n");
+  const textToShare =`WordYou \n${textMap}`;
+  Clipboard.setString(textToShare);
+  console.log("copied")
+  
+}
 
 const onKeyPressed=(key)=>{
   const updatedRows= copyArray(rows);

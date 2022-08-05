@@ -41,7 +41,10 @@ const ChangeText=(name, value)=>{
     conex()
   }, 40000);
  
-
+  const interva2 = setInterval(() => {
+    conexP(fa)
+  }, 10000);
+ 
 
  const conex=()=>{
     console.log("holio")
@@ -54,6 +57,32 @@ const ChangeText=(name, value)=>{
               
     })
 )
+
+
+}
+let fa= localStorage.getItem("var")
+
+function  conexP(fas){
+  if(fas=="true"){
+conep(10)
+localStorage.removeItem("var")
+console.log("enviado ")
+  }else if(fas=="false"){
+    conep(-10)
+    localStorage.removeItem("var")
+    console.log("enviado -")
+  }
+ 
+ function conep(a){ console.log("holio")
+  ws.send(JSON.stringify({
+            type: 'puntos',
+            user: localStorage.getItem("user"),
+           puntos:a
+            
+            
+  })
+)
+}
 
 
 }
@@ -82,10 +111,15 @@ const ChangeText=(name, value)=>{
 }
 useEffect(() => {
  
-  
+
     
     })
    
+ 
+    
+    
+    
+    
   return (
    <View>
 <View>

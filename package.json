@@ -31,7 +31,8 @@
     "react-native-sass-transformer": "^2.0.0",
     "react-native-sms-retriever": "^1.1.1",
     "react-native-web": "0.17.7",
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "expo-clipboard": "~3.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
