@@ -7,16 +7,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
  
 export default function RoomG() {
 
-  const [state,setState]= useState({
-    conectados:'',
-    
-
-})  
 const [flag,setFlag]= useState(true)  
-const ChangeText=(name, value)=>{
-   setState({...state, [name]: value})
-}
-   
+
    const navigation= useNavigation()
   
     const ws = new WebSocket('wss://ejemplosocketword.herokuapp.com/');
@@ -96,9 +88,9 @@ console.log("enviado ")
     console.log(packet)
   switch(packet.type){
     case "cantidad conectados":
-      ChangeText("conectados",packet.cantJugadores)
+    
       localStorage.setItem("cantidad", packet.cantJugadores);
-      console.log(state.conectados)
+    
       ;
     case "conectado":
       console.log(data);
@@ -123,7 +115,7 @@ useEffect(() => {
   return (
    <View>
 <View>
-  <Text>{state.conectados}</Text>
+  <Text>{localStorage.getItem("cantidad")}</Text>
 </View>
 
    <Button color='#7dcea0'
